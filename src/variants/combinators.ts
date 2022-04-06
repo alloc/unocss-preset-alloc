@@ -8,4 +8,5 @@ export const variantCombinators: Variant[] = [
   variantMatcher('sibling', input => `${input}+*`),
   variantMatcher('siblings', input => `${input}~*`),
   variantMatcher('svg', input => `${input} svg`),
+  variantMatcher('span', input => `${input} span`),
 ]
