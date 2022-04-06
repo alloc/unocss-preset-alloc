@@ -52,7 +52,7 @@ export function rem(str: string) {
   const [, n, unit] = match
   const num = parseFloat(n)
   if (!Number.isNaN(num))
-    return round(num) + (unit || 'rem')
+    return round(num) + (unit || 'em')
 }
 
 export function px(str: string) {
