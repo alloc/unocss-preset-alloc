@@ -31,6 +31,7 @@ import { margins, paddings } from "./spacing";
 import {
   appearances,
   breaks,
+  containment,
   contents,
   cursors,
   displays,
@@ -76,6 +77,7 @@ export const rules: Rule[] = [
   fontStyles,
   fontSmoothings,
   objectPositions,
+  containment,
   boxShadows,
   rings,
   flex,
