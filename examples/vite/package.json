@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev": "vite dev"
+  },
+  "devDependencies": {
+    "unocss": "^0.22.7",
+    "unocss-preset-alloc": "link:../..",
+    "vite": "^2.6.0"
+  },
+  "dependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}
