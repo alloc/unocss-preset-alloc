@@ -24,12 +24,12 @@ export interface PresetMiniOptions extends PresetOptions {
   variablePrefix?: string
 }
 
-export const presetMini = (options: PresetMiniOptions = {}): Preset<Theme> => {
+export const unocssPreset = (options: PresetMiniOptions = {}): Preset<Theme> => {
   options.dark = options.dark ?? 'class'
   options.attributifyPseudo = options.attributifyPseudo ?? false
 
   return {
-    name: '@unocss/preset-mini',
+    name: 'unocss-preset-alloc',
     theme,
     rules,
     variants: variants(options),
@@ -40,7 +40,7 @@ export const presetMini = (options: PresetMiniOptions = {}): Preset<Theme> => {
   }
 }
 
-export default presetMini
+export default unocssPreset
 
 function VarPrefixPostprocessor(prefix: string): Postprocessor {
   return (obj) => {
