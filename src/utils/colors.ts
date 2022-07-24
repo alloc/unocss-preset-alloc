@@ -1,6 +1,11 @@
 import type { CSSColorValue, RGBAColorValue } from '@unocss/core'
+import { escapeRegExp } from '@unocss/core'
 
 /* eslint-disable no-case-declarations */
+
+const cssColorFunctions = ['hsl', 'hsla', 'hwb', 'lab', 'lch', 'oklab', 'oklch', 'rgb', 'rgba']
+const alphaPlaceholders = ['%alpha', '<alpha-value>']
+const alphaPlaceholdersRE = new RegExp(alphaPlaceholders.map(v => escapeRegExp(v)).join('|'))
 
 export function hex2rgba(hex = ''): RGBAColorValue | undefined {
   const color = parseHexColor(hex)
@@ -59,6 +64,25 @@ export function parseCssColor(str = ''): CSSColorValue | undefined {
     return
 
   return { type, components, alpha }
+}
+
+export function colorToString(color: CSSColorValue | string, alphaOverride?: string | number) {
+  if (typeof color === 'string')
+    return color.replace(alphaPlaceholdersRE, `${alphaOverride ?? 1}`)
+
+  const { components } = color
+  let { alpha, type } = color
+  alpha = alphaOverride ?? alpha
+  type = type.toLowerCase()
+
+  // Comma separated functions
+  if (['hsla', 'hsl', 'rgba', 'rgb'].includes(type))
+    return `${type.replace('a', '')}a(${components.join(',')}${alpha == null ? '' : `,${alpha}`})`
+
+  alpha = alpha == null ? '' : ` / ${alpha}`
+  if (cssColorFunctions.includes(type))
+    return `${type}(${components.join(' ')}${alpha})`
+  return `color(${type} ${components.join(' ')}${alpha})`
 }
 
 function parseColor(str: string) {

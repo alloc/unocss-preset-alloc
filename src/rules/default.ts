@@ -52,6 +52,7 @@ import { textAligns, verticalAligns } from "./align";
 import { appearance, outline, willChange } from "./behaviors";
 import { textDecorations } from "./decoration";
 import { svgUtilities } from "./svg";
+import { filters } from "./filters";
 
 export const rules: Rule[] = [
   cssVariables,
@@ -79,6 +80,7 @@ export const rules: Rule[] = [
   objectPositions,
   containment,
   boxShadows,
+  filters,
   rings,
   flex,
   grids,

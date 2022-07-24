@@ -1,6 +1,6 @@
-import type { CSSEntries, CSSObject, DynamicMatcher, ParsedColorValue, RuleContext } from '@unocss/core'
+import { CSSEntries, CSSObject, DynamicMatcher, ParsedColorValue, RuleContext, toArray } from '@unocss/core'
 import type { Theme } from '../theme'
-import { hex2rgba } from './colors'
+import { colorToString, hex2rgba, parseCssColor } from './colors'
 import { handler as h } from './handlers'
 import { directionMap } from './mappings'
 
@@ -169,4 +169,75 @@ export const colorResolver = (property: string, varName: string): DynamicMatcher
       [property]: color.replace('%alpha', `${alpha || 1}`),
     }
   }
+}
+
+export function colorableShadows(shadows: string | string[], colorVar: string) {
+  const colored = []
+  shadows = toArray(shadows)
+  for (let i = 0; i < shadows.length; i++) {
+    // shadow values are between 3 to 6 terms including color
+    const components = getComponents(shadows[i], ' ', 6)
+    if (!components || components.length < 3)
+      return shadows
+    const color = parseCssColor(components.pop())
+    if (color == null)
+      return shadows
+    colored.push(`${components.join(' ')} var(${colorVar}, ${colorToString(color)})`)
+  }
+  return colored
+}
+
+export function getComponent(str: string, open: string, close: string, separator: string) {
+  if (str === '')
+    return
+
+  const l = str.length
+  let parenthesis = 0
+  for (let i = 0; i < l; i++) {
+    switch (str[i]) {
+      case open:
+        parenthesis++
+        break
+
+      case close:
+        if (--parenthesis < 0)
+          return
+        break
+
+      case separator:
+        if (parenthesis === 0) {
+          if (i === 0 || i === l - 1)
+            return
+          return [
+            str.slice(0, i),
+            str.slice(i + 1),
+          ]
+        }
+    }
+  }
+
+  return [
+    str,
+    '',
+  ]
+}
+
+export function getComponents(str: string, separator: string, limit?: number) {
+  if (separator.length !== 1)
+    return
+  limit = limit ?? 10
+  const components = []
+  let i = 0
+  while (str !== '') {
+    if (++i > limit)
+      return
+    const componentPair = getComponent(str, '(', ')', separator)
+    if (!componentPair)
+      return
+    const [component, rest] = componentPair
+    components.push(component)
+    str = rest
+  }
+  if (components.length > 0)
+    return components
 }
