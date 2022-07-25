@@ -4,16 +4,16 @@ Date: Mon, 25 Jul 2022 11:22:37 -0400
 Subject: [PATCH] refactor: rename options type
 
 ---
- packages/preset-mini/src/index.ts            | 2 +-
- packages/preset-mini/src/variants/dark.ts    | 4 ++--
- packages/preset-mini/src/variants/default.ts | 4 ++--
- packages/preset-mini/src/variants/pseudo.ts  | 4 ++--
+ src/index.ts            | 2 +-
+ src/variants/dark.ts    | 4 ++--
+ src/variants/default.ts | 4 ++--
+ src/variants/pseudo.ts  | 4 ++--
  4 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/packages/preset-mini/src/index.ts b/packages/preset-mini/src/index.ts
+diff --git a/src/index.ts b/src/index.ts
 index d8c0d22..79b4116 100644
---- a/packages/preset-mini/src/index.ts
-+++ b/packages/preset-mini/src/index.ts
+--- a/src/index.ts
++++ b/src/index.ts
 @@ -27,7 +27,7 @@ export interface DarkModeSelectors {
    dark?: string
  }
@@ -23,10 +23,10 @@ index d8c0d22..79b4116 100644
    /**
     * Dark mode options
     *
-diff --git a/packages/preset-mini/src/variants/dark.ts b/packages/preset-mini/src/variants/dark.ts
+diff --git a/src/variants/dark.ts b/src/variants/dark.ts
 index 6a34d3c..25b1a0a 100644
---- a/packages/preset-mini/src/variants/dark.ts
-+++ b/packages/preset-mini/src/variants/dark.ts
+--- a/src/variants/dark.ts
++++ b/src/variants/dark.ts
 @@ -1,8 +1,8 @@
  import type { Variant } from '@unocss/core'
 -import type { PresetMiniOptions } from '..'
@@ -38,10 +38,10 @@ index 6a34d3c..25b1a0a 100644
    if (options?.dark === 'class' || typeof options.dark === 'object') {
      const { dark = '.dark', light = '.light' } = typeof options.dark === 'string'
        ? {}
-diff --git a/packages/preset-mini/src/variants/default.ts b/packages/preset-mini/src/variants/default.ts
+diff --git a/src/variants/default.ts b/src/variants/default.ts
 index a266825..313e190 100644
---- a/packages/preset-mini/src/variants/default.ts
-+++ b/packages/preset-mini/src/variants/default.ts
+--- a/src/variants/default.ts
++++ b/src/variants/default.ts
 @@ -1,5 +1,5 @@
  import type { Variant } from '@unocss/core'
 -import type { PresetMiniOptions } from '..'
@@ -58,10 +58,10 @@ index a266825..313e190 100644
    variantVariables,
    variantCssLayer,
  
-diff --git a/packages/preset-mini/src/variants/pseudo.ts b/packages/preset-mini/src/variants/pseudo.ts
+diff --git a/src/variants/pseudo.ts b/src/variants/pseudo.ts
 index f9aa754..adfb3c4 100644
---- a/packages/preset-mini/src/variants/pseudo.ts
-+++ b/packages/preset-mini/src/variants/pseudo.ts
+--- a/src/variants/pseudo.ts
++++ b/src/variants/pseudo.ts
 @@ -1,6 +1,6 @@
  import type { VariantObject } from '@unocss/core'
  import { escapeRegExp } from '@unocss/core'

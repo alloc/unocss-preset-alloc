@@ -5,13 +5,13 @@ Subject: [PATCH] feat: use `em` by default instead of `rem`
 
 This makes scaling any component a simple task.
 ---
- packages/preset-mini/src/utils/handlers/handlers.ts | 2 +-
+ src/utils/handlers/handlers.ts | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/packages/preset-mini/src/utils/handlers/handlers.ts b/packages/preset-mini/src/utils/handlers/handlers.ts
+diff --git a/src/utils/handlers/handlers.ts b/src/utils/handlers/handlers.ts
 index ae53c1b..9b7d1da 100644
---- a/packages/preset-mini/src/utils/handlers/handlers.ts
-+++ b/packages/preset-mini/src/utils/handlers/handlers.ts
+--- a/src/utils/handlers/handlers.ts
++++ b/src/utils/handlers/handlers.ts
 @@ -51,7 +51,7 @@ export function rem(str: string) {
    const [, n, unit] = match
    const num = parseFloat(n)

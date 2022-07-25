@@ -27,12 +27,15 @@ async function main() {
   task.finish()
   task = startTask('Patching upstream')
 
+  const upstreamPkgRoot = 'packages/preset-mini'
+
   const patches = await readdir('patches')
   for (let patch of patches) {
     patch = resolve('patches', patch)
-    await exec('git am --ignore-whitespace', [patch], {
-      cwd: upstreamDir,
-    })
+    await exec(
+      `git am --ignore-whitespace --directory=${upstreamPkgRoot} ${patch}`,
+      { cwd: upstreamDir }
+    )
   }
 
   task.finish(`${patches.length} patches applied.`)
@@ -45,7 +48,7 @@ async function main() {
 
   const roots = {
     ours: 'src',
-    theirs: resolve(upstreamDir, 'packages/preset-mini/src'),
+    theirs: resolve(upstreamDir, upstreamPkgRoot, 'src'),
   }
 
   const globs = [

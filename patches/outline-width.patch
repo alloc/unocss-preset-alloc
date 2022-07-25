@@ -4,13 +4,13 @@ Date: Mon, 25 Jul 2022 12:11:05 -0400
 Subject: [PATCH] feat: set `outline-style: solid` along with outline width
 
 ---
- packages/preset-mini/src/rules/behaviors.ts | 5 ++++-
+ src/rules/behaviors.ts | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/packages/preset-mini/src/rules/behaviors.ts b/packages/preset-mini/src/rules/behaviors.ts
+diff --git a/src/rules/behaviors.ts b/src/rules/behaviors.ts
 index c28b6e0..97fe608 100644
---- a/packages/preset-mini/src/rules/behaviors.ts
-+++ b/packages/preset-mini/src/rules/behaviors.ts
+--- a/src/rules/behaviors.ts
++++ b/src/rules/behaviors.ts
 @@ -4,7 +4,10 @@ import { colorResolver, globalKeywords, handler as h } from '../utils'
  
  export const outline: Rule<Theme>[] = [

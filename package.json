@@ -51,7 +51,8 @@
   ],
   "scripts": {
     "dev": "tsup --sourcemap --watch",
-    "build": "tsup --clean"
+    "build": "tsup --clean",
+    "pull": "node scripts/pull"
   },
   "dependencies": {
     "@unocss/core": "^0.44.7"
