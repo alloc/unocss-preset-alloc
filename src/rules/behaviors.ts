@@ -7,6 +7,7 @@ export const outline: Rule<Theme>[] = [
   [
     /^outline-(?:width-|size-)?(.+)$/,
     ([, d], { theme }) => ({
+      'outline-style': 'solid',
       'outline-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d),
     }),
     { autocomplete: 'outline-(width|size)-<num>' },

@@ -1,0 +1,28 @@
+From 0a59f6a479a75d338c3dde91dbeefe078273b692 Mon Sep 17 00:00:00 2001
+From: Alec Larson <1925840+aleclarson@users.noreply.github.com>
+Date: Mon, 25 Jul 2022 12:11:05 -0400
+Subject: [PATCH] feat: set `outline-style: solid` along with outline width
+
+---
+ packages/preset-mini/src/rules/behaviors.ts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/packages/preset-mini/src/rules/behaviors.ts b/packages/preset-mini/src/rules/behaviors.ts
+index c28b6e0..97fe608 100644
+--- a/packages/preset-mini/src/rules/behaviors.ts
++++ b/packages/preset-mini/src/rules/behaviors.ts
+@@ -4,7 +4,10 @@ import { colorResolver, globalKeywords, handler as h } from '../utils'
+ 
+ export const outline: Rule<Theme>[] = [
+   // size
+-  [/^outline-(?:width-|size-)?(.+)$/, ([, d], { theme }) => ({ 'outline-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d) }), { autocomplete: 'outline-(width|size)-<num>' }],
++  [/^outline-(?:width-|size-)?(.+)$/, ([, d], { theme }) => ({
++    'outline-style': 'solid',
++    'outline-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d) }), { autocomplete: 'outline-(width|size)-<num>'
++  }],
+ 
+   // color
+   [/^outline-(?:color-)?(.+)$/, colorResolver('outline-color', 'outline-color'), { autocomplete: 'outline-$colors' }],
+-- 
+2.36.1
+
