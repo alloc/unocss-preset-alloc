@@ -5,24 +5,42 @@ import { variantBreakpoints } from './breakpoints'
 import { variantCombinators } from './combinators'
 import { variantColorsMediaOrClass } from './dark'
 import { variantLanguageDirections } from './directions'
-import { variantImportant, variantLayer, variantNegative } from './misc'
-import { variantMotions, variantOrientations, variantPrint } from './media'
-import { partClasses, variantPseudoClassFunctions, variantPseudoClasses, variantPseudoElements, variantTaggedPseudoClasses } from './pseudo'
+import {
+  variantCssLayer,
+  variantInternalLayer,
+  variantScope,
+  variantSelector,
+  variantVariables,
+} from './misc'
+import { variantNegative } from './negative'
+import { variantImportant } from './important'
+import { variantCustomMedia, variantPrint } from './media'
+import {
+  partClasses,
+  variantPseudoClassFunctions,
+  variantPseudoClassesAndElements,
+  variantTaggedPseudoClasses,
+} from './pseudo'
 
 export const variants = (options: Options): Variant<Theme>[] => [
-  variantLayer,
+  variantVariables,
+  variantCssLayer,
+
+  variantSelector,
+  variantInternalLayer,
   variantNegative,
   variantImportant,
   variantPrint,
-  ...variantOrientations,
-  ...variantMotions,
+  variantCustomMedia,
   variantBreakpoints,
   ...variantCombinators,
-  variantPseudoClasses,
+
+  variantPseudoClassesAndElements,
   variantPseudoClassFunctions,
   ...variantTaggedPseudoClasses(options),
-  variantPseudoElements,
+
   partClasses,
   ...variantColorsMediaOrClass(options),
   ...variantLanguageDirections,
+  variantScope,
 ]

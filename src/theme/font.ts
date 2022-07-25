@@ -38,11 +38,11 @@ export const fontFamily = {
 }
 
 export const fontSize: Theme['fontSize'] = {
-  'xs': ['0.75rem', '1rem'],
-  'sm': ['0.875rem', '1.25rem'],
-  'base': ['1rem', '1.5rem'],
-  'lg': ['1.125rem', '1.75rem'],
-  'xl': ['1.25rem', '1.75rem'],
+  xs: ['0.75rem', '1rem'],
+  sm: ['0.875rem', '1.25rem'],
+  base: ['1rem', '1.5rem'],
+  lg: ['1.125rem', '1.75rem'],
+  xl: ['1.25rem', '1.75rem'],
   '2xl': ['1.5rem', '2rem'],
   '3xl': ['1.875rem', '2.25rem'],
   '4xl': ['2.25rem', '2.5rem'],
@@ -54,12 +54,12 @@ export const fontSize: Theme['fontSize'] = {
 }
 
 export const textIndent: Theme['textIndent'] = {
-  'DEFAULT': '1.5rem',
-  'xs': '0.5rem',
-  'sm': '1rem',
-  'md': '1.5rem',
-  'lg': '2rem',
-  'xl': '2.5rem',
+  DEFAULT: '1.5rem',
+  xs: '0.5rem',
+  sm: '1rem',
+  md: '1.5rem',
+  lg: '2rem',
+  xl: '2.5rem',
   '2xl': '3rem',
   '3xl': '4rem',
 }
@@ -74,11 +74,11 @@ export const textStrokeWidth: Theme['textStrokeWidth'] = {
 
 export const textShadow: Theme['textShadow'] = {
   DEFAULT: ['0 0 1px rgba(0,0,0,0.2)', '0 0 1px rgba(1,0,5,0.1)'],
+  none: '0 0 rgba(0,0,0,0)',
   sm: '1px 1px 3px rgba(36,37,47,0.25)',
   md: ['0 1px 2px rgba(30,29,39,0.19)', '1px 2px 4px rgba(54,64,147,0.18)'],
   lg: ['3px 3px 6px rgba(0,0,0,0.26)', '0 0 5px rgba(15,3,86,0.22)'],
   xl: ['1px 1px 3px rgba(0,0,0,0.29)', '2px 4px 7px rgba(73,64,125,0.35)'],
-  none: '0 0 #0000',
 }
 
 export const lineHeight: Theme['lineHeight'] = {

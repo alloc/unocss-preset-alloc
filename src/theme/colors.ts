@@ -334,13 +334,12 @@ export const colors: Theme['colors'] = {
 }
 
 // assign default color, and color shortcuts
-Object.values(colors).forEach((color) => {
+Object.values(colors).forEach(color => {
   if (typeof color !== 'string') {
     color.DEFAULT = color.DEFAULT || color[400]
-    Object.keys(color).forEach((key) => {
+    Object.keys(color).forEach(key => {
       const short = +key / 100
-      if (short === Math.round(short))
-        color[short] = color[key]
+      if (short === Math.round(short)) color[short] = color[key]
     })
   }
 })

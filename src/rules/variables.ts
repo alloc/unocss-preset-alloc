@@ -6,7 +6,6 @@ const variablesAbbrMap: Record<string, string> = {
   break: 'word-break',
   case: 'text-transform',
   content: 'align-content',
-  flex: 'flex',
   fw: 'font-weight',
   items: 'align-items',
   justify: 'justify-content',
@@ -19,13 +18,18 @@ const variablesAbbrMap: Record<string, string> = {
 }
 
 export const cssVariables: Rule[] = [
-  [/^(.+?)-(\$.+)$/, ([, name, varname]) => {
-    const prop = variablesAbbrMap[name]
-    if (prop)
-      return { [prop]: h.cssvar(varname) }
-  }],
+  [
+    /^(.+?)-(\$.+)$/,
+    ([, name, varname]) => {
+      const prop = variablesAbbrMap[name]
+      if (prop) return { [prop]: h.cssvar(varname) }
+    },
+  ],
 ]
 
 export const cssProperty: Rule[] = [
-  [/^\[([^:]+):(.+)\]$/, ([, prop, value]) => ({ [prop]: h.bracket(`[${value}]`) })],
+  [
+    /^\[([\w_-]+):([^'"]+)\]$/,
+    ([, prop, value]) => ({ [prop]: h.bracket(`[${value}]`) }),
+  ],
 ]

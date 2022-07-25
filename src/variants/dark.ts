@@ -1,12 +1,19 @@
-import type { VariantFunction } from '@unocss/core'
+import type { Variant } from '@unocss/core'
 import type { Options } from '..'
 import { variantMatcher, variantParentMatcher } from '../utils'
 
-export const variantColorsMediaOrClass = (options: Options = {}): VariantFunction[] => {
-  if (options?.dark === 'class') {
+export const variantColorsMediaOrClass = (options: Options = {}): Variant[] => {
+  if (options?.dark === 'class' || typeof options.dark === 'object') {
+    const { dark = '.dark', light = '.light' } =
+      typeof options.dark === 'string' ? {} : options.dark
+
     return [
-      variantMatcher('dark', input => `.dark $$ ${input}`),
-      variantMatcher('light', input => `.light $$ ${input}`),
+      variantMatcher('dark', input => ({
+        prefix: `${dark} $$ ${input.prefix}`,
+      })),
+      variantMatcher('light', input => ({
+        prefix: `${light} $$ ${input.prefix}`,
+      })),
     ]
   }
 
