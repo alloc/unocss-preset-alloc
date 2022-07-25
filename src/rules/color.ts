@@ -19,4 +19,5 @@ export const textColors: Rule[] = [
 export const bgColors: Rule[] = [
   [/^bg-(.+)$/, colorResolver('background-color', 'bg')],
   [/^bg-op(?:acity)?-?(.+)$/, ([, opacity]) => ({ '--un-bg-opacity': h.bracket.percent(opacity) })],
+  [/^bg-image-(.+)$/, ([, d]) => ({ 'background-image': h.bracket(d) })],
 ]
