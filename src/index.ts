@@ -29,6 +29,11 @@ export const unocssPreset = (options: Options = {}): Preset<Theme> => {
   options.dark = options.dark ?? 'class'
   options.attributifyPseudo = options.attributifyPseudo ?? false
 
+  theme.preflightBase = {
+    ...theme.preflightBase,
+    ...alloc.preflightBase,
+  }
+
   return {
     name: 'unocss-preset-alloc',
     theme,
