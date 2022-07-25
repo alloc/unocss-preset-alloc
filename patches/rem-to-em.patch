@@ -1,0 +1,26 @@
+From f20e5b0138579fc0cebccafa6c1945f0674dd396 Mon Sep 17 00:00:00 2001
+From: Alec Larson <1925840+aleclarson@users.noreply.github.com>
+Date: Mon, 25 Jul 2022 10:52:54 -0400
+Subject: [PATCH] feat: use `em` by default instead of `rem`
+
+This makes scaling any component a simple task.
+---
+ packages/preset-mini/src/utils/handlers/handlers.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/packages/preset-mini/src/utils/handlers/handlers.ts b/packages/preset-mini/src/utils/handlers/handlers.ts
+index ae53c1b..9b7d1da 100644
+--- a/packages/preset-mini/src/utils/handlers/handlers.ts
++++ b/packages/preset-mini/src/utils/handlers/handlers.ts
+@@ -51,7 +51,7 @@ export function rem(str: string) {
+   const [, n, unit] = match
+   const num = parseFloat(n)
+   if (!Number.isNaN(num))
+-    return unit ? `${round(num)}${unit}` : `${round(num / 4)}rem`
++    return unit ? `${round(num)}${unit}` : `${round(num)}em`
+ }
+ 
+ export function px(str: string) {
+-- 
+2.36.1
+

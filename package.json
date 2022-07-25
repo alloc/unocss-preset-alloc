@@ -8,6 +8,7 @@
   ],
   "author": "Alec Larson",
   "sideEffects": false,
+  "prettier": "@alloc/prettier-config",
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -53,9 +54,15 @@
     "build": "tsup --clean"
   },
   "dependencies": {
-    "@unocss/core": "^0.22.7"
+    "@unocss/core": "^0.44.7"
   },
   "devDependencies": {
+    "@alloc/prettier-config": "^1.0.0",
+    "@cush/exec": "^1.8.0",
+    "kleur": "^4.1.5",
+    "misty": "^1.6.10",
+    "prettier": "^2.7.1",
+    "recrawl": "^2.2.1",
     "tsup": "^6.0.1"
   }
 }
