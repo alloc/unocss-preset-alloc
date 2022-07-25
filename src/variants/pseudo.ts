@@ -1,6 +1,6 @@
 import type { VariantFunction, VariantHandler, VariantObject } from '@unocss/core'
 import { escapeRegExp, toArray } from '@unocss/core'
-import type { PresetMiniOptions } from '..'
+import type { Options } from '..'
 
 const PseudoClasses: Record<string, string | undefined> = Object.fromEntries([
   // location
@@ -135,7 +135,7 @@ export const variantPseudoClassFunctions: VariantObject = {
   multiPass: true,
 }
 
-export const variantTaggedPseudoClasses = (options: PresetMiniOptions = {}): VariantObject[] => {
+export const variantTaggedPseudoClasses = (options: Options = {}): VariantObject[] => {
   const attributify = !!options?.attributifyPseudo
 
   return [

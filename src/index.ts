@@ -9,7 +9,7 @@ export { parseColor } from './utils'
 
 export type { ThemeAnimation, Theme }
 
-export interface PresetMiniOptions extends PresetOptions {
+export interface Options extends PresetOptions {
   /**
    * @default 'class'
    */
@@ -24,7 +24,7 @@ export interface PresetMiniOptions extends PresetOptions {
   variablePrefix?: string
 }
 
-export const unocssPreset = (options: PresetMiniOptions = {}): Preset<Theme> => {
+export const unocssPreset = (options: Options = {}): Preset<Theme> => {
   options.dark = options.dark ?? 'class'
   options.attributifyPseudo = options.attributifyPseudo ?? false
 
