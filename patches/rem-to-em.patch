@@ -1,6 +1,6 @@
-From f20e5b0138579fc0cebccafa6c1945f0674dd396 Mon Sep 17 00:00:00 2001
+From 8e5d1af3ec55d8eb063a050779173824d192e7a4 Mon Sep 17 00:00:00 2001
 From: Alec Larson <1925840+aleclarson@users.noreply.github.com>
-Date: Mon, 25 Jul 2022 10:52:54 -0400
+Date: Tue, 26 Jul 2022 19:13:56 -0400
 Subject: [PATCH] feat: use `em` by default instead of `rem`
 
 This makes scaling any component a simple task.
@@ -9,10 +9,10 @@ This makes scaling any component a simple task.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/utils/handlers/handlers.ts b/src/utils/handlers/handlers.ts
-index ae53c1b..9b7d1da 100644
+index 46f9ae8..6a8d9c9 100644
 --- a/src/utils/handlers/handlers.ts
 +++ b/src/utils/handlers/handlers.ts
-@@ -51,7 +51,7 @@ export function rem(str: string) {
+@@ -90,7 +90,7 @@ export function rem(str: string) {
    const [, n, unit] = match
    const num = parseFloat(n)
    if (!Number.isNaN(num))

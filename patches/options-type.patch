@@ -1,45 +1,33 @@
-From dc5d536a15d11ecdfed3372b0d863c39bbb614a9 Mon Sep 17 00:00:00 2001
+From 7a1ff1f5b395025227ef0076881086250c501f85 Mon Sep 17 00:00:00 2001
 From: Alec Larson <1925840+aleclarson@users.noreply.github.com>
-Date: Mon, 25 Jul 2022 11:22:37 -0400
+Date: Tue, 26 Jul 2022 19:19:41 -0400
 Subject: [PATCH] refactor: rename options type
 
 ---
- src/index.ts            | 2 +-
- src/variants/dark.ts    | 4 ++--
+ src/variants/dark.ts    | 6 ++----
  src/variants/default.ts | 4 ++--
  src/variants/pseudo.ts  | 4 ++--
- 4 files changed, 7 insertions(+), 7 deletions(-)
+ 3 files changed, 6 insertions(+), 8 deletions(-)
 
-diff --git a/src/index.ts b/src/index.ts
-index d8c0d22..79b4116 100644
---- a/src/index.ts
-+++ b/src/index.ts
-@@ -27,7 +27,7 @@ export interface DarkModeSelectors {
-   dark?: string
- }
- 
--export interface PresetMiniOptions extends PresetOptions {
-+export interface Options extends PresetOptions {
-   /**
-    * Dark mode options
-    *
 diff --git a/src/variants/dark.ts b/src/variants/dark.ts
-index 6a34d3c..25b1a0a 100644
+index 640f4e1..90834df 100644
 --- a/src/variants/dark.ts
 +++ b/src/variants/dark.ts
-@@ -1,8 +1,8 @@
+@@ -1,10 +1,8 @@
  import type { Variant } from '@unocss/core'
 -import type { PresetMiniOptions } from '..'
 +import type { Options } from '..'
  import { variantMatcher, variantParentMatcher } from '../utils'
  
--export const variantColorsMediaOrClass = (options: PresetMiniOptions = {}): Variant[] => {
+-export const variantColorsMediaOrClass = (
+-  options: PresetMiniOptions = {}
+-): Variant[] => {
 +export const variantColorsMediaOrClass = (options: Options = {}): Variant[] => {
    if (options?.dark === 'class' || typeof options.dark === 'object') {
-     const { dark = '.dark', light = '.light' } = typeof options.dark === 'string'
-       ? {}
+     const { dark = '.dark', light = '.light' } =
+       typeof options.dark === 'string' ? {} : options.dark
 diff --git a/src/variants/default.ts b/src/variants/default.ts
-index a266825..313e190 100644
+index c2c7017..77998d2 100644
 --- a/src/variants/default.ts
 +++ b/src/variants/default.ts
 @@ -1,5 +1,5 @@
@@ -49,9 +37,9 @@ index a266825..313e190 100644
  import type { Theme } from '../theme'
  import { variantBreakpoints } from './breakpoints'
  import { variantCombinators } from './combinators'
-@@ -11,7 +11,7 @@ import { variantImportant } from './important'
- import { variantCustomMedia, variantPrint } from './media'
- import { partClasses, variantPseudoClassFunctions, variantPseudoClassesAndElements, variantTaggedPseudoClasses } from './pseudo'
+@@ -22,7 +22,7 @@ import {
+   variantTaggedPseudoClasses,
+ } from './pseudo'
  
 -export const variants = (options: PresetMiniOptions): Variant<Theme>[] => [
 +export const variants = (options: Options): Variant<Theme>[] => [
@@ -59,7 +47,7 @@ index a266825..313e190 100644
    variantCssLayer,
  
 diff --git a/src/variants/pseudo.ts b/src/variants/pseudo.ts
-index f9aa754..adfb3c4 100644
+index 2aa4819..1756989 100644
 --- a/src/variants/pseudo.ts
 +++ b/src/variants/pseudo.ts
 @@ -1,6 +1,6 @@
@@ -68,17 +56,17 @@ index f9aa754..adfb3c4 100644
 -import type { PresetMiniOptions } from '..'
 +import type { Options } from '..'
  
- const PseudoClasses: Record<string, string> = Object.fromEntries([
-   // pseudo elements part 1
-@@ -159,7 +159,7 @@ export const variantPseudoClassFunctions: VariantObject = {
-   autocomplete: `(${PseudoClassFunctionsStr})-(${PseudoClassesStr}|${PseudoClassesColonStr}):`,
+ const PseudoClasses: Record<string, string> = Object.fromEntries(
+   [
+@@ -202,7 +202,7 @@ export const variantPseudoClassFunctions: VariantObject = {
  }
  
--export const variantTaggedPseudoClasses = (options: PresetMiniOptions = {}): VariantObject[] => {
-+export const variantTaggedPseudoClasses = (options: Options = {}): VariantObject[] => {
+ export const variantTaggedPseudoClasses = (
+-  options: PresetMiniOptions = {}
++  options: Options = {}
+ ): VariantObject[] => {
    const attributify = !!options?.attributifyPseudo
  
-   return [
 -- 
 2.36.1
 
