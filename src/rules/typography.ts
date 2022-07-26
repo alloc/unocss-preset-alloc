@@ -88,7 +88,7 @@ export const fonts: Rule<Theme>[] = [
     /^(?:font-)?tracking-(.+)$/,
     ([, s], { theme }) => ({
       'letter-spacing':
-        theme.letterSpacing?.[s] || h.bracket.cssvar.global.rem(s),
+        theme.letterSpacing?.[s] || h.bracket.cssvar.global.px(s),
     }),
     { autocomplete: 'tracking-$letterSpacing' },
   ],
