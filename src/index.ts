@@ -1,41 +1,66 @@
 import type { Postprocessor, Preset, PresetOptions } from '@unocss/core'
 import * as alloc from './alloc'
+import { preflights } from './preflights'
 import { rules } from './rules'
 import type { Theme, ThemeAnimation } from './theme'
 import { theme } from './theme'
 import { variants } from './variants'
 
+export { preflights } from './preflights'
 export { theme, colors } from './theme'
 export { parseColor } from './utils'
 
 export type { ThemeAnimation, Theme }
 
+export interface DarkModeSelectors {
+  /**
+   * Selector for light variant.
+   *
+   * @default '.light'
+   */
+  light?: string
+
+  /**
+   * Selector for dark variant.
+   *
+   * @default '.dark'
+   */
+  dark?: string
+}
+
 export interface Options extends PresetOptions {
   /**
+   * Dark mode options
+   *
    * @default 'class'
    */
-  dark?: 'class' | 'media'
+  dark?: 'class' | 'media' | DarkModeSelectors
   /**
+   * Generate pesudo selector as `[group=""]` instead of `.group`
+   *
    * @default false
    */
   attributifyPseudo?: Boolean
   /**
+   * Prefix for CSS variables.
+   *
    * @default 'un-'
    */
   variablePrefix?: string
+  /**
+   * Utils prefix
+   *
+   * @default undefined
+   */
+  prefix?: string
 }
 
 export const unocssPreset = (options: Options = {}): Preset<Theme> => {
   options.dark = options.dark ?? 'class'
   options.attributifyPseudo = options.attributifyPseudo ?? false
 
-  theme.preflightBase = {
-    ...theme.preflightBase,
-    ...alloc.preflightBase,
-  }
-
   return {
-    name: 'unocss-preset-alloc',
+    name: '@unocss/preset-mini',
     theme,
     rules: [...alloc.rules, ...rules],
     variants: [...alloc.variants, ...variants(options)],
@@ -44,6 +69,8 @@ export const unocssPreset = (options: Options = {}): Preset<Theme> => {
       options.variablePrefix && options.variablePrefix !== 'un-'
         ? VarPrefixPostprocessor(options.variablePrefix)
         : undefined,
+    preflights,
+    prefix: options.prefix,
   }
 }
 
