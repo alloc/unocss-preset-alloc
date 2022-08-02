@@ -7,6 +7,9 @@ export const variants: Variant[] = [
   variantMatcher('span', input => ({
     selector: `${input.selector} span, ${input.selector} a`,
   })),
+  variantMatcher('loading', input => ({
+    selector: `.loading ${input.selector}`,
+  })),
 ]
 
 function deviceVariants(): Variant[] {
