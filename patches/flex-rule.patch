@@ -1,0 +1,37 @@
+From 743b68a7e6e2b61570c0e420e1aa8aff92fd71a7 Mon Sep 17 00:00:00 2001
+From: Alec Larson <1925840+aleclarson@users.noreply.github.com>
+Date: Tue, 2 Aug 2022 15:54:56 -0400
+Subject: [PATCH] fix: flex rule not matching simple numbers
+
+---
+ src/rules/flex.ts | 14 +-------------
+ 1 file changed, 1 insertion(+), 13 deletions(-)
+
+diff --git a/src/rules/flex.ts b/src/rules/flex.ts
+index 2b36df1..45d6124 100644
+--- a/src/rules/flex.ts
++++ b/src/rules/flex.ts
+@@ -9,19 +9,7 @@ export const flex: Rule<Theme>[] = [
+   ['flex-inline', { display: 'inline-flex' }],
+ 
+   // flex
+-  [
+-    /^flex-(.*)$/,
+-    ([, d]) => ({
+-      flex:
+-        h.bracket(d) != null
+-          ? h
+-              .bracket(d)!
+-              .split(' ')
+-              .map(e => h.cssvar.fraction(e) ?? e)
+-              .join(' ')
+-          : h.cssvar.fraction(d),
+-    }),
+-  ],
++  [/^flex-(.+)$/, ([, d]) => ({ flex: h.bracket.cssvar.number(d) })],
+   ['flex-1', { flex: '1 1 0%' }],
+   ['flex-auto', { flex: '1 1 auto' }],
+   ['flex-initial', { flex: '0 1 auto' }],
+-- 
+2.36.1
+
