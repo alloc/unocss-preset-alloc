@@ -5,7 +5,7 @@ export const variants: Variant[] = [
   ...deviceVariants(),
   zoomVariant(),
   variantMatcher('span', input => ({
-    selector: `${input.selector} span`,
+    selector: `${input.selector} span, ${input.selector} a`,
   })),
 ]
 
