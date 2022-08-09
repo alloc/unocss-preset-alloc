@@ -9,6 +9,8 @@ export const rules: Rule<Theme>[] = [
 
   // background gradients
   [/^bg-image-(.+)$/, ([, d]) => ({ 'background-image': h.bracket(d) })],
+  ['bg-repeat-x', { 'background-repeat': 'repeat-x' }],
+  ['bg-bottom', { 'background-position': 'bottom' }],
 
   // containment
   ['contain-layout', { contain: 'layout' }],
