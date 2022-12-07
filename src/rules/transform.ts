@@ -10,31 +10,20 @@ import {
 const transformValues = ['translate', 'rotate', 'scale']
 
 const transformCpu = [
-  'translateX(var(--un-translate-x))',
-  'translateY(var(--un-translate-y))',
-  'translateZ(var(--un-translate-z))',
+  'translate(var(--un-translate-x), var(--un-translate-y))',
   'rotate(var(--un-rotate))',
-  'rotateX(var(--un-rotate-x))',
-  'rotateY(var(--un-rotate-y))',
-  'rotateZ(var(--un-rotate-z))',
   'skewX(var(--un-skew-x))',
   'skewY(var(--un-skew-y))',
   'scaleX(var(--un-scale-x))',
   'scaleY(var(--un-scale-y))',
-  'scaleZ(var(--un-scale-z))',
 ].join(' ')
 
 const transformGpu = [
   'translate3d(var(--un-translate-x), var(--un-translate-y), var(--un-translate-z))',
-  'rotate(var(--un-rotate))',
-  'rotateX(var(--un-rotate-x))',
-  'rotateY(var(--un-rotate-y))',
-  'rotateZ(var(--un-rotate-z))',
+  'rotate3d(var(--un-rotate-x), var(--un-rotate-y), var(--un-rotate-z))',
   'skewX(var(--un-skew-x))',
   'skewY(var(--un-skew-y))',
-  'scaleX(var(--un-scale-x))',
-  'scaleY(var(--un-scale-y))',
-  'scaleZ(var(--un-scale-z))',
+  'scale3d(var(--un-scale-x), var(--un-scale-y), var(--un-scale-z))',
 ].join(' ')
 
 export const transformBase = {

@@ -17,6 +17,7 @@ export const positions: Rule[] = [
     ([, v]) => (globalKeywords.includes(v) ? { position: v } : undefined),
   ],
   [/^(?:position-|pos-)?(static)$/, ([, v]) => ({ position: v })],
+  ['fixed', { position: 'fixed', 'backface-visibility': 'hidden' }],
 ]
 
 export const justifies: Rule[] = [

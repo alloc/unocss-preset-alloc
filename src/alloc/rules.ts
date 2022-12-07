@@ -7,6 +7,31 @@ import { filters } from './rules/filters'
 export const rules: Rule<Theme>[] = [
   ...filters,
 
+  // font styles
+  ['tabnum', { 'font-feature-settings': 'tnum' }],
+  [
+    /^line-clamp-(\d+)$/,
+    ([, lines]) => ({
+      display: '-webkit-box',
+      overflow: 'hidden',
+      '-webkit-box-orient': 'vertical',
+      '-webkit-line-clamp': lines,
+    }),
+  ],
+
+  // scrolling
+  ['no-overscroll', { 'overscroll-behavior': 'contain' }],
+  [
+    'no-scrollbars',
+    {
+      'scrollbar-width': 'none', // Firefox
+      '-ms-overflow-style': 'none', // Edge
+    },
+  ],
+
+  // content visibility
+  ['content-visibility-auto', { 'content-visibility': 'auto' }],
+
   // background gradients
   [/^bg-image-(.+)$/, ([, d]) => ({ 'background-image': h.bracket(d) })],
   ['bg-repeat-x', { 'background-repeat': 'repeat-x' }],

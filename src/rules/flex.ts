@@ -10,6 +10,7 @@ export const flex: Rule<Theme>[] = [
 
   // flex
   [/^flex-(.+)$/, ([, d]) => ({ flex: h.bracket.cssvar.number(d) })],
+  [/^flex-(\d+(\.\d+)?[%])$/, ([, d]) => ({ flex: `0 0 ${d}` })],
   ['flex-1', { flex: '1 1 0%' }],
   ['flex-auto', { flex: '1 1 auto' }],
   ['flex-initial', { flex: '0 1 auto' }],
