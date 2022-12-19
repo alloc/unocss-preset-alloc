@@ -59,3 +59,16 @@ export const scrollSnap: Rule[] = [
   [/^scroll-p-(block|inline)-(-?.+)$/, directionSize('scroll-padding')],
   [/^scroll-p-?([bi][se])-?(-?.+)$/, directionSize('scroll-padding')],
 ]
+
+export const noOverScroll: Rule = [
+  'no-overscroll',
+  { 'overscroll-behavior': 'contain' },
+]
+
+export const noScrollBars: Rule = [
+  'no-scrollbars',
+  {
+    'scrollbar-width': 'none', // Firefox
+    '-ms-overflow-style': 'none', // Edge
+  },
+]
