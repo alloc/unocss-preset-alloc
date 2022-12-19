@@ -3,9 +3,11 @@ import { Theme } from '../../theme'
 import { h } from '../utils'
 import { positionMap } from '../utils'
 import { filters } from './rules/filters'
+import { scrollSnap } from './rules/scroll-snap'
 
 export const rules: Rule<Theme>[] = [
   ...filters,
+  ...scrollSnap,
 
   // font styles
   ['tabnum', { 'font-feature-settings': 'tnum' }],
