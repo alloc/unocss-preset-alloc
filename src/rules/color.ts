@@ -36,6 +36,11 @@ export const textColors: Rule[] = [
     ([, opacity]) => ({ '--un-text-opacity': h.bracket.percent(opacity) }),
     { autocomplete: '(text|color|c)-(op|opacity)-<percent>' },
   ],
+  [
+    /^caret-(.+)$/,
+    colorResolver('caret-color', 'text'),
+    { autocomplete: 'caret-$colors' },
+  ],
 ]
 
 export const bgColors: Rule[] = [
