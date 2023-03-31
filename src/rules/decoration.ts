@@ -51,7 +51,7 @@ export const textDecorations: Rule<Theme>[] = [
     { autocomplete: '(underline|decoration)-$colors' },
   ],
   [
-    /^(?:underline|decoration)-op(?:acity)?-?(.+)$/,
+    /^(?:underline|decoration)-opacity-?(.+)$/,
     ([, opacity]) => ({ '--un-line-opacity': h.bracket.percent(opacity) }),
     { autocomplete: '(underline|decoration)-(op|opacity)-<percent>' },
   ],

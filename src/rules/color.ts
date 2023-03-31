@@ -6,10 +6,7 @@ import { numberWithUnitRE } from '../utils/handlers/regex'
  * @example op10 op-30 opacity-100
  */
 export const opacity: Rule[] = [
-  [
-    /^op(?:acity)?-?(.+)$/,
-    ([, d]) => ({ opacity: h.bracket.percent.cssvar(d) }),
-  ],
+  [/^opacity-?(.+)$/, ([, d]) => ({ opacity: h.bracket.percent.cssvar(d) })],
 ]
 
 /**
@@ -32,7 +29,7 @@ export const textColors: Rule[] = [
     { autocomplete: '(text|color|c)-$colors' },
   ],
   [
-    /^(?:text|color|c)-op(?:acity)?-?(.+)$/,
+    /^(?:text|color|c)-opacity-?(.+)$/,
     ([, opacity]) => ({ '--un-text-opacity': h.bracket.percent(opacity) }),
     { autocomplete: '(text|color|c)-(op|opacity)-<percent>' },
   ],
@@ -50,7 +47,7 @@ export const bgColors: Rule[] = [
     { autocomplete: 'bg-$colors' },
   ],
   [
-    /^bg-op(?:acity)?-?(.+)$/,
+    /^bg-opacity-?(.+)$/,
     ([, opacity]) => ({ '--un-bg-opacity': h.bracket.percent(opacity) }),
     { autocomplete: 'bg-(op|opacity)-<percent>' },
   ],

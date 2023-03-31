@@ -18,17 +18,17 @@ export const flex: Rule<Theme>[] = [
 
   // shrink/grow/basis
   [
-    /^(?:flex-)?shrink(?:-(.*))?$/,
+    /^shrink-(.+)$/,
     ([, d = '']) => ({ 'flex-shrink': h.bracket.cssvar.number(d) ?? 1 }),
     { autocomplete: ['flex-shrink-<num>', 'shrink-<num>'] },
   ],
   [
-    /^(?:flex-)?grow(?:-(.*))?$/,
+    /^grow-(.+)$/,
     ([, d = '']) => ({ 'flex-grow': h.bracket.cssvar.number(d) ?? 1 }),
     { autocomplete: ['flex-grow-<num>', 'grow-<num>'] },
   ],
   [
-    /^(?:flex-)?basis-(.+)$/,
+    /^basis-(.+)$/,
     ([, d], { theme }) => ({
       'flex-basis': theme.spacing?.[d] ?? h.bracket.cssvar.auto.fraction.rem(d),
     }),

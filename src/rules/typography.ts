@@ -55,10 +55,10 @@ export const fonts: Rule<Theme>[] = [
 
   // weights
   [
-    /^(?:font|fw)-?([^-]+)$/,
+    /^font-?([^-]+)$/,
     ([, s]) => ({ 'font-weight': weightMap[s] || h.global.number(s) }),
     {
-      autocomplete: `(font|fw)-(100|200|300|400|500|600|700|800|900|${Object.keys(
+      autocomplete: `font-(100|200|300|400|500|600|700|800|900|${Object.keys(
         weightMap
       ).join('|')})`,
     },
@@ -66,11 +66,11 @@ export const fonts: Rule<Theme>[] = [
 
   // leadings
   [
-    /^(?:font-)?(?:leading|lh)-(.+)$/,
+    /^leading-(.+)$/,
     ([, s], { theme }) => ({
       'line-height': theme.lineHeight?.[s] || h.bracket.cssvar.global.rem(s),
     }),
-    { autocomplete: '(leading|lh)-$lineHeight' },
+    { autocomplete: 'leading-$lineHeight' },
   ],
 
   // synthesis
@@ -85,7 +85,7 @@ export const fonts: Rule<Theme>[] = [
 
   // tracking
   [
-    /^(?:font-)?tracking-(.+)$/,
+    /^tracking-(.+)$/,
     ([, s], { theme }) => ({
       'letter-spacing':
         theme.letterSpacing?.[s] || h.bracket.cssvar.global.px(s),
@@ -95,7 +95,7 @@ export const fonts: Rule<Theme>[] = [
 
   // word-spacing
   [
-    /^(?:font-)?word-spacing-(.+)$/,
+    /^word-spacing-(.+)$/,
     ([, s], { theme }) => ({
       'word-spacing': theme.wordSpacing?.[s] || h.bracket.cssvar.global.rem(s),
     }),
@@ -105,7 +105,7 @@ export const fonts: Rule<Theme>[] = [
 
 export const tabSizes: Rule<Theme>[] = [
   [
-    /^tab(?:-(.+))?$/,
+    /^tab-(.+)$/,
     ([, s]) => {
       const v = h.bracket.cssvar.global.number(s || '4')
       if (v != null) {
@@ -149,7 +149,7 @@ export const textStrokes: Rule<Theme>[] = [
     { autocomplete: 'text-stroke-$colors' },
   ],
   [
-    /^text-stroke-op(?:acity)?-?(.+)$/,
+    /^text-stroke-opacity-?(.+)$/,
     ([, opacity]) => ({
       '--un-text-stroke-opacity': h.bracket.percent(opacity),
     }),
@@ -183,7 +183,7 @@ export const textShadows: Rule<Theme>[] = [
     { autocomplete: 'text-shadow-color-$colors' },
   ],
   [
-    /^text-shadow-color-op(?:acity)?-?(.+)$/,
+    /^text-shadow-color-opacity-?(.+)$/,
     ([, opacity]) => ({
       '--un-text-shadow-opacity': h.bracket.percent(opacity),
     }),

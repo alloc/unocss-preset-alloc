@@ -45,7 +45,7 @@ export const transformBase = {
 export const transforms: Rule[] = [
   // origins
   [
-    /^(?:transform-)?origin-(.+)$/,
+    /^origin-(.+)$/,
     ([, s]) => ({ 'transform-origin': positionMap[s] ?? h.bracket.cssvar(s) }),
     {
       autocomplete: [
@@ -57,7 +57,7 @@ export const transforms: Rule[] = [
 
   // perspectives
   [
-    /^(?:transform-)?perspect(?:ive)?-(.+)$/,
+    /^perspective-(.+)$/,
     ([, s]) => {
       const v = h.bracket.cssvar.px.numberWithUnit(s)
       if (v != null) {
@@ -71,7 +71,7 @@ export const transforms: Rule[] = [
 
   // skip 1 & 2 letters shortcut
   [
-    /^(?:transform-)?perspect(?:ive)?-origin-(.+)$/,
+    /^perspective-origin-(.+)$/,
     ([, s]) => {
       const v =
         h.bracket.cssvar(s) ?? (s.length >= 3 ? positionMap[s] : undefined)
@@ -85,18 +85,18 @@ export const transforms: Rule[] = [
   ],
 
   // modifiers
-  [/^(?:transform-)?translate-()(.+)$/, handleTranslate],
-  [/^(?:transform-)?translate-([xyz])-(.+)$/, handleTranslate],
-  [/^(?:transform-)?rotate-()(.+)$/, handleRotate],
-  [/^(?:transform-)?rotate-([xyz])-(.+)$/, handleRotate],
+  [/^translate-()(.+)$/, handleTranslate],
+  [/^translate-([xyz])-(.+)$/, handleTranslate],
+  [/^rotate-()(.+)$/, handleRotate],
+  [/^rotate-([xyz])-(.+)$/, handleRotate],
   [
-    /^(?:transform-)?skew-([xy])-(.+)$/,
+    /^skew-([xy])-(.+)$/,
     handleSkew,
     { autocomplete: ['transform-skew-(x|y)-<percent>'] },
   ],
-  [/^(?:transform-)?scale-()(.+)$/, handleScale],
+  [/^scale-()(.+)$/, handleScale],
   [
-    /^(?:transform-)?scale-([xyz])-(.+)$/,
+    /^scale-([xyz])-(.+)$/,
     handleScale,
     {
       autocomplete: [
@@ -107,14 +107,10 @@ export const transforms: Rule[] = [
   ],
 
   // style
-  [
-    /^(?:transform-)?preserve-3d$/,
-    () => ({ 'transform-style': 'preserve-3d' }),
-  ],
-  [/^(?:transform-)?preserve-flat$/, () => ({ 'transform-style': 'flat' })],
+  [/^preserve-3d$/, () => ({ 'transform-style': 'preserve-3d' })],
+  [/^preserve-flat$/, () => ({ 'transform-style': 'flat' })],
 
   // base
-  ['transform', { transform: transformCpu }],
   ['transform-cpu', { transform: transformCpu }],
   ['transform-gpu', { transform: transformGpu }],
   ['transform-none', { transform: 'none' }],

@@ -33,7 +33,7 @@ export const boxShadows: Rule<Theme>[] = [
     { autocomplete: 'shadow-$colors' },
   ],
   [
-    /^shadow-op(?:acity)?-?(.+)$/,
+    /^shadow-opacity-?(.+)$/,
     ([, opacity]) => ({ '--un-shadow-opacity': h.bracket.percent(opacity) }),
     { autocomplete: 'shadow-(op|opacity)-<percent>' },
   ],

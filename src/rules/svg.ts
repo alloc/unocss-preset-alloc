@@ -10,7 +10,7 @@ export const svgUtilities: Rule<Theme>[] = [
     { autocomplete: 'fill-$colors' },
   ],
   [
-    /^fill-op(?:acity)?-?(.+)$/,
+    /^fill-opacity-?(.+)$/,
     ([, opacity]) => ({ '--un-fill-opacity': h.bracket.percent(opacity) }),
     { autocomplete: 'fill-(op|opacity)-<percent>' },
   ],
@@ -48,7 +48,7 @@ export const svgUtilities: Rule<Theme>[] = [
     { autocomplete: 'stroke-$colors' },
   ],
   [
-    /^stroke-op(?:acity)?-?(.+)$/,
+    /^stroke-opacity-?(.+)$/,
     ([, opacity]) => ({ '--un-stroke-opacity': h.bracket.percent(opacity) }),
     { autocomplete: 'stroke-(op|opacity)-<percent>' },
   ],
