@@ -10,6 +10,9 @@ export const variants: Variant[] = [
   variantMatcher('loading', input => ({
     selector: `.loading ${input.selector}`,
   })),
+  variantMatcher('scrollbar-thumb', input => ({
+    selector: `${input.selector}::-webkit-scrollbar-thumb`,
+  })),
 ]
 
 function deviceVariants(): Variant[] {

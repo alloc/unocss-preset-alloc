@@ -8,6 +8,7 @@ import { noOverScroll, noScrollBars, scrollSnap } from './rules/scroll'
 import { lineClamp, tabularNums } from './rules/text'
 import { objectFit, objectPosition } from './rules/object-fit'
 import { zoom } from './rules/zoom'
+import { touchActions } from './rules/touch-actions'
 
 export const rules: Rule<Theme>[] = [
   ...background,
@@ -15,6 +16,7 @@ export const rules: Rule<Theme>[] = [
   ...filters,
   ...objectFit,
   ...scrollSnap,
+  ...touchActions,
   contentVisibility,
   lineClamp,
   noOverScroll,

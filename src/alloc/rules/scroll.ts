@@ -11,6 +11,7 @@ export const scrollSnap: Rule[] = [
     /^snap-(x|y)$/,
     ([, d]) => ({
       'scroll-snap-type': `${d} var(--un-scroll-snap-strictness)`,
+      '-webkit-overflow-scrolling': 'touch',
     }),
     { autocomplete: 'snap-(x|y|both)' },
   ],
