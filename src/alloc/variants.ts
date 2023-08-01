@@ -16,6 +16,9 @@ export const variants: Variant[] = [
   variantMatcher('slider-thumb', input => ({
     selector: `${input.selector}::-webkit-slider-thumb`,
   })),
+  variantMatcher('details-open', input => ({
+    selector: `details[open] ${input.selector}`,
+  })),
 ]
 
 function deviceVariants(): Variant[] {
