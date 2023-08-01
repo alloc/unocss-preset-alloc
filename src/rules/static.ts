@@ -88,6 +88,9 @@ export const userSelects: Rule[] = [
   ['select-none', { 'user-select': 'none' }],
   ...makeGlobalStaticRules('select', 'user-select'),
 ]
+userSelects.forEach(([, css]: any) => {
+  css['-webkit-user-select'] = css['user-select']
+})
 
 export const whitespaces: Rule[] = [
   [
