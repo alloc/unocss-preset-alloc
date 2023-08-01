@@ -27,9 +27,10 @@ function zoomVariant(): Variant {
   return {
     name: 'zoom',
     match(input: string) {
-      if (input.startsWith('zoom-')) {
+      const match = /^zoom-(-?\d+(?:\.\d+)?)$/.exec(input)
+      if (match) {
         return {
-          matcher: input,
+          matcher: 'text-' + match[1],
           selector(input) {
             return `${input} > *`
           },
