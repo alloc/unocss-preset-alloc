@@ -9,7 +9,7 @@ export const variantMatcher = (
   name: string,
   handler: (input: VariantHandlerContext) => Record<string, any>
 ): VariantObject => {
-  const re = new RegExp(`^${escapeRegExp(name)}[:-]`)
+  const re = new RegExp(`^${escapeRegExp(name)}:`)
   return {
     name,
     match: (input: string): VariantHandler | undefined => {
@@ -33,7 +33,7 @@ export const variantParentMatcher = (
   name: string,
   parent: string
 ): VariantObject => {
-  const re = new RegExp(`^${escapeRegExp(name)}[:-]`)
+  const re = new RegExp(`^${escapeRegExp(name)}:`)
   return {
     name,
     match: (input: string): VariantHandler | undefined => {
