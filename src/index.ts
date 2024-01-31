@@ -60,7 +60,7 @@ export const unocssPreset = (options: Options = {}): Preset<Theme> => {
   options.attributifyPseudo = options.attributifyPseudo ?? false
 
   return {
-    name: '@unocss/preset-mini',
+    name: 'unocss-preset-alloc',
     theme,
     rules: [...alloc.rules, ...rules],
     variants: [...alloc.variants, ...variants(options)],
