@@ -11,3 +11,10 @@ export const lineClamp: Rule = [
     '-webkit-line-clamp': lines,
   }),
 ]
+
+export const textReset: Rule = [
+  'text-reset',
+  {
+    'font-size': 'var(--root-font-size)',
+  },
+]
