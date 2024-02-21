@@ -5,6 +5,7 @@ import { rules } from './rules'
 import type { Theme, ThemeAnimation } from './theme'
 import { theme } from './theme'
 import { variants } from './variants'
+import { variantMatcher } from './utils'
 
 export { preflights } from './preflights'
 export { theme, colors } from './theme'
@@ -53,17 +54,30 @@ export interface Options extends PresetOptions {
    * @default undefined
    */
   prefix?: string
+  /**
+   * An array of class names attached to the `html` element which may be used as
+   * UnoCSS variant prefixes for userAgent-specific layout.
+   */
+  userAgentClasses?: string[]
 }
 
 export const unocssPreset = (options: Options = {}): Preset<Theme> => {
   options.dark = options.dark ?? 'class'
   options.attributifyPseudo = options.attributifyPseudo ?? false
 
+  const userAgentVariants = options.userAgentClasses
+    ? options.userAgentClasses.map(name =>
+        variantMatcher(name, input => ({
+          selector: `html.${name} ${input.selector}`,
+        }))
+      )
+    : []
+
   return {
     name: 'unocss-preset-alloc',
     theme,
     rules: [...alloc.rules, ...rules],
-    variants: [...alloc.variants, ...variants(options)],
+    variants: [...alloc.variants, ...variants(options), ...userAgentVariants],
     options,
     postprocess:
       options.variablePrefix && options.variablePrefix !== 'un-'

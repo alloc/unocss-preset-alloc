@@ -2,7 +2,6 @@ import { variantMatcher } from '../utils'
 import { Variant } from '@unocss/core'
 
 export const variants: Variant[] = [
-  ...deviceVariants(),
   zoomVariant(),
   variantMatcher('span', input => ({
     selector: `${input.selector} span, ${input.selector} a`,
@@ -20,14 +19,6 @@ export const variants: Variant[] = [
     selector: `details[open] ${input.selector}`,
   })),
 ]
-
-function deviceVariants(): Variant[] {
-  return ['xl', 'tablet', 'phone', 'xs'].map(name =>
-    variantMatcher(name, input => ({
-      selector: `html.${name} ${input.selector}`,
-    }))
-  )
-}
 
 function zoomVariant(): Variant {
   return {
