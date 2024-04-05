@@ -173,7 +173,11 @@ export function bracketOfPosition(str: string) {
 }
 
 export function cssvar(str: string) {
-  if (str.match(/^\$\S/)) return `var(--${escapeSelector(str.slice(1))})`
+  if (str.match(/^\$\S/)) {
+    const [name, fallback] = str.slice(1).split(':')
+    const fallbackArg = fallback ? `, ${fallback}` : ''
+    return `var(--${escapeSelector(name)}${fallbackArg})`
+  }
 }
 
 export function time(str: string) {

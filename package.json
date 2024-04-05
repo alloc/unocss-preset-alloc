@@ -55,7 +55,8 @@
     "pull": "node scripts/pull"
   },
   "dependencies": {
-    "@unocss/core": "^0.50.8"
+    "@unocss/core": "^0.58.6",
+    "@unocss/rule-utils": "^0.58.6"
   },
   "devDependencies": {
     "@alloc/prettier-config": "^1.0.0",
