@@ -7,7 +7,7 @@ import { escapeRegExp } from '@unocss/core'
 
 export const variantMatcher = (
   name: string,
-  handler: (input: VariantHandlerContext) => Record<string, any>
+  handler: (input: VariantHandlerContext) => Partial<VariantHandlerContext>
 ): VariantObject => {
   const re = new RegExp(`^${escapeRegExp(name)}:`)
   return {
@@ -17,16 +17,24 @@ export const variantMatcher = (
       if (match) {
         return {
           matcher: input.slice(match[0].length),
-          handle: (input, next) =>
-            next({
+          handle(input, next) {
+            input = next(input)
+            return {
               ...input,
-              ...handler(input),
-            }),
+              ...onlyDefinedProperties(handler(input)),
+            }
+          },
         }
       }
     },
     autocomplete: `${name}:`,
   }
+}
+
+function onlyDefinedProperties<T extends object>(obj: T): Required<T> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, v]) => v !== undefined)
+  ) as any
 }
 
 export const variantParentMatcher = (
