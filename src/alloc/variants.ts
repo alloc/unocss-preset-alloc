@@ -8,7 +8,7 @@ export const variants: Variant[] = [
     selector: `${input.selector} span, ${input.selector} a`,
   })),
   variantMatcher('loading', input => ({
-    selector: `.loading ${input.selector}`,
+    parent: `${input.parent ?? ''}.loading`,
   })),
   variantMatcher('scrollbar-thumb', input => ({
     selector: `${input.selector}::-webkit-scrollbar-thumb`,
