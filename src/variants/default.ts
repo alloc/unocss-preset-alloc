@@ -23,7 +23,7 @@ import {
 } from './pseudo'
 
 export const variants = (options: Options): Variant<Theme>[] => [
-  variantVariables,
+  // variantVariables,
   variantCssLayer,
 
   variantSelector,
