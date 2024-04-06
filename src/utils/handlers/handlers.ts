@@ -174,7 +174,7 @@ export function bracketOfPosition(str: string) {
 
 export function cssvar(str: string) {
   if (str.match(/^\$\S/)) {
-    const [name, fallback] = str.slice(1).split(':')
+    const [name, fallback] = str.slice(1).split('|')
     const fallbackArg = fallback ? `, ${fallback}` : ''
     return `var(--${escapeSelector(name)}${fallbackArg})`
   }
