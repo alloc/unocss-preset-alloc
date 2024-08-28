@@ -1,4 +1,4 @@
-import type { CSSColorValue, RGBAColorValue } from '@unocss/core'
+import type { CSSColorValue, RGBAColorValue } from '@unocss/rule-utils'
 import { escapeRegExp } from '@unocss/core'
 import { getComponents } from './utilities'
 
