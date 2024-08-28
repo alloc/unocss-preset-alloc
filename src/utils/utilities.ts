@@ -2,11 +2,11 @@ import type {
   CSSEntries,
   CSSObject,
   DynamicMatcher,
-  ParsedColorValue,
   Rule,
   RuleContext,
   VariantContext,
 } from '@unocss/core'
+import type { ParsedColorValue } from '@unocss/rule-utils'
 import { toArray } from '@unocss/core'
 import type { Theme } from '../theme'
 import { colorOpacityToString, colorToString, parseCssColor } from './colors'
