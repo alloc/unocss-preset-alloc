@@ -50,8 +50,8 @@
     "*.css"
   ],
   "scripts": {
-    "dev": "tsup --sourcemap --watch",
-    "build": "tsup --clean",
+    "dev": "rimraf dist && tsup-node --sourcemap --watch",
+    "build": "rimraf dist && tsup-node",
     "pull": "node scripts/pull"
   },
   "dependencies": {
@@ -65,6 +65,7 @@
     "misty": "^1.6.10",
     "prettier": "^2.7.1",
     "recrawl": "^2.2.1",
+    "rimraf": "^6.0.1",
     "tsup": "^6.0.1",
     "typescript": "^5.3.3"
   }
