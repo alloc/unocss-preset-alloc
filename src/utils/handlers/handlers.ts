@@ -90,7 +90,7 @@ export function rem(str: string) {
   const [, n, unit] = match
   const num = parseFloat(n)
   if (!Number.isNaN(num))
-    return unit ? `${round(num)}${unit}` : `${round(num)}em`
+    return `${round(num)}${unit ?? 'rem'}`
 }
 
 export function px(str: string) {
