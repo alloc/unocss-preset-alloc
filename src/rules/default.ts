@@ -24,7 +24,6 @@ import {
   positions,
   zIndexes,
 } from './position'
-import { rings } from './ring'
 import { boxShadows } from './shadow'
 import { aspectRatio, sizes } from './size'
 import { margins, paddings } from './spacing'
@@ -75,7 +74,6 @@ export const rules: Rule[] = [
   fontStyles,
   fontSmoothings,
   boxShadows,
-  rings,
   flex,
   grids,
   gaps,
