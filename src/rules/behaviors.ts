@@ -11,10 +11,10 @@ export const outlineBase = {
 }
 
 export const outlinePreflight = /* css */ `
-.outline {
+.outline-center, .outline-inside, .outline-outside {
   position: relative;
 }
-.outline::before {
+.outline-center::before, .outline-inside::before, .outline-outside::before {
   content: '';
   position: absolute;
   pointer-events: none;
@@ -54,7 +54,7 @@ export const outline: Rule<Theme>[] = [
 
   // position
   [
-    /^outline-(?:position-)?(center|inside|outside)$/,
+    /^outline-(center|inside|outside)$/,
     ([, d]) => ({
       '--un-outline-position': d,
     }),
