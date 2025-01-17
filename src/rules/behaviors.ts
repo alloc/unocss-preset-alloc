@@ -2,21 +2,44 @@ import type { Rule } from '@unocss/core'
 import type { Theme } from '../theme'
 import { colorResolver, globalKeywords, handler as h } from '../utils'
 
+export const outlineBase = {
+  '--un-border-radius': '0',
+  '--un-outline-color': 'transparent',
+  '--un-outline-width': '0px',
+  '--un-outline-style': 'solid',
+  '--un-outline-position': '0',
+}
+
+export const outlinePreflight = /* css */ `
+.outline {
+  position: relative;
+}
+.outline::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  border: var(--un-outline-width) var(--un-outline-style) var(--un-outline-color);
+  border-radius: calc(var(--un-border-radius) + (var(--un-outline-position) * var(--un-outline-width)));
+  inset: calc(var(--un-outline-position) * var(--un-outline-width));
+}
+`
+
 export const outline: Rule<Theme>[] = [
   // size
   [
     /^outline-(?:width-|size-)?(.+)$/,
-    ([, d], { theme }) => ({
-      'outline-style': 'solid',
-      'outline-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d),
-    }),
+    ([, d], { theme, symbols }) => ([{
+      '--un-outline-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d),
+    }, {
+      [symbols.parent]: '.outline::before'
+    }]),
     { autocomplete: 'outline-(width|size)-<num>' },
   ],
 
   // color
   [
     /^outline-(?:color-)?(.+)$/,
-    colorResolver('outline-color', 'outline-color'),
+    colorResolver('--un-outline-color', 'outline-color'),
     { autocomplete: 'outline-$colors' },
   ],
 
@@ -24,13 +47,20 @@ export const outline: Rule<Theme>[] = [
   [
     /^outline-offset-(.+)$/,
     ([, d], { theme }) => ({
-      'outline-offset': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d),
+      '--un-outline-offset': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d),
     }),
     { autocomplete: 'outline-(offset)-<num>' },
   ],
 
+  // position
+  [
+    /^outline-(?:position-)?(center|inside|outside)$/,
+    ([, d]) => ({
+      '--un-outline-position': d,
+    }),
+  ],
+
   // style
-  ['outline', { 'outline-style': 'solid' }],
   ...[
     'auto',
     'dashed',
@@ -43,11 +73,7 @@ export const outline: Rule<Theme>[] = [
     'inset',
     'outset',
     ...globalKeywords,
-  ].map(v => [`outline-${v}`, { 'outline-style': v }] as Rule<Theme>),
-  [
-    'outline-none',
-    { outline: '2px solid transparent', 'outline-offset': '2px' },
-  ],
+  ].map(v => [`outline-${v}`, { '--un-outline-style': v }] as Rule<Theme>),
 ]
 
 export const appearance: Rule[] = [

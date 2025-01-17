@@ -193,7 +193,7 @@ function handlerRounded(
     theme.borderRadius?.[s || 'DEFAULT'] ||
     h.bracket.cssvar.global.fraction.rem(s || '1')
   if (a in cornerMap && v != null)
-    return cornerMap[a].map(i => [`border${i}-radius`, v])
+    return cornerMap[a].flatMap(i => [[`border${i}-radius`, v], [`--un-border${i}-radius`, v]])
 }
 
 export function handlerBorderStyle([, a = '', s]: string[]):
