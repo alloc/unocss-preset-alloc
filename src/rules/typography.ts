@@ -68,7 +68,7 @@ export const fonts: Rule<Theme>[] = [
   [
     /^leading-(.+)$/,
     ([, s], { theme }) => ({
-      'line-height': theme.lineHeight?.[s] || h.bracket.cssvar.global.rem(s),
+      'line-height': theme.lineHeight?.[s] || h.bracket.cssvar.global.number(s),
     }),
     { autocomplete: 'leading-$lineHeight' },
   ],
