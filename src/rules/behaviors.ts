@@ -56,7 +56,7 @@ export const outline: Rule<Theme>[] = [
   [
     /^outline-(center|inside|outside)$/,
     ([, d]) => ({
-      '--un-outline-position': d,
+      '--un-outline-position': d === 'center' ? '-0.5' : d === 'inside' ? '0' : '1',
     }),
   ],
 
