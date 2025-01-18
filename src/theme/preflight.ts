@@ -1,7 +1,6 @@
-import { boxShadowsBase, outlineBase, transformBase } from '../rules'
+import { boxShadowsBase, transformBase } from '../rules'
 
 export const preflightBase = {
-  ...outlineBase,
   ...transformBase,
   ...boxShadowsBase,
 }

@@ -2,24 +2,20 @@ import type { Rule } from '@unocss/core'
 import type { Theme } from '../theme'
 import { colorResolver, globalKeywords, handler as h } from '../utils'
 
-export const outlineBase = {
-  '--un-border-radius': '0',
-  '--un-outline-color': 'transparent',
-  '--un-outline-width': '0px',
-  '--un-outline-style': 'solid',
-  '--un-outline-position': '0',
-}
-
 export const outlinePreflight = /* css */ `
-.outline-center, .outline-inside, .outline-outside {
+.outline-center,
+.outline-inside,
+.outline-outside {
   position: relative;
 }
-.outline-center::before, .outline-inside::before, .outline-outside::before {
+.outline-center::before,
+.outline-inside::before,
+.outline-outside::before {
   content: '';
   position: absolute;
   pointer-events: none;
-  border: var(--un-outline-width) var(--un-outline-style) var(--un-outline-color);
-  border-radius: calc(var(--un-border-radius) + (var(--un-outline-position) * var(--un-outline-width)));
+  border: var(--un-outline-width) var(--un-outline-style, solid) var(--un-outline-color);
+  border-radius: calc(var(--un-border-radius, 0px) - (var(--un-outline-position) * var(--un-outline-width)));
   inset: calc(var(--un-outline-position) * var(--un-outline-width));
 }
 `
@@ -28,11 +24,9 @@ export const outline: Rule<Theme>[] = [
   // size
   [
     /^outline-(?:width-|size-)?(.+)$/,
-    ([, d], { theme, symbols }) => ([{
+    ([, d], { theme }) => ({
       '--un-outline-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d),
-    }, {
-      [symbols.parent]: '.outline::before'
-    }]),
+    }),
     { autocomplete: 'outline-(width|size)-<num>' },
   ],
 
