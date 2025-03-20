@@ -1,26 +1,19 @@
 import type { Rule } from '@unocss/core'
 import type { Theme } from '../theme'
-import { colorResolver, colorableShadows, handler as h } from '../utils'
+import { colorResolver, handler as h } from '../utils'
 import { varEmpty } from './static'
 
 export const boxShadowsBase = {
-  '--un-ring-offset-shadow': '0 0 rgba(0,0,0,0)',
-  '--un-ring-shadow': '0 0 rgba(0,0,0,0)',
+  '--un-shadow-color': varEmpty,
   '--un-shadow-inset': varEmpty,
-  '--un-shadow': '0 0 rgba(0,0,0,0)',
 }
 
 export const boxShadows: Rule<Theme>[] = [
   [
-    /^shadow(?:-(.+))?$/,
-    ([, d], { theme }) => {
-      const v = theme.boxShadow?.[d || 'DEFAULT']
-      if (v) {
-        return {
-          '--un-shadow': colorableShadows(v, '--un-shadow-color').join(','),
-          'box-shadow':
-            'var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow)',
-        }
+    /^shadow-\[(.+)\]$/,
+    ([, shadow], { theme }) => {
+      return {
+        'box-shadow': `var(--un-shadow-inset) ${shadow.replace(/_/g, ' ')} var(--un-shadow-color)`,
       }
     },
     { autocomplete: 'shadow-$boxShadow' },
@@ -28,12 +21,12 @@ export const boxShadows: Rule<Theme>[] = [
 
   // color
   [
-    /^shadow-(.+)$/,
+    /^shadow-color-(.+)$/,
     colorResolver('--un-shadow-color', 'shadow'),
     { autocomplete: 'shadow-$colors' },
   ],
   [
-    /^shadow-opacity-?(.+)$/,
+    /^shadow-opacity-(.+)$/,
     ([, opacity]) => ({ '--un-shadow-opacity': h.bracket.percent(opacity) }),
     { autocomplete: 'shadow-(op|opacity)-<percent>' },
   ],
