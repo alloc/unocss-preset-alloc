@@ -4,13 +4,6 @@ import type { Theme } from '../theme'
 
 const regexCache: Record<string, RegExp> = {}
 
-const calcMaxWidthBySize = (size: string) => {
-  const value = size.match(/^-?[0-9]+\.?[0-9]*/)?.[0] || ''
-  const unit = size.slice(value.length)
-  const maxWidth = parseFloat(value) - 0.1
-  return Number.isNaN(maxWidth) ? size : `${maxWidth}${unit}`
-}
-
 export const variantBreakpoints: Variant<Theme> = {
   name: 'breakpoints',
   match(matcher, context) {
@@ -38,6 +31,11 @@ export const variantBreakpoints: Variant<Theme> = {
       let order = 1000 // parseInt(size)
 
       if (isLtPrefix) {
+        // lt-md means max-width of sm breakpoint
+        // Only valid if there's a previous breakpoint
+        if (idx <= 0)
+          continue
+
         order -= idx + 1
         return {
           matcher: m,
@@ -46,7 +44,7 @@ export const variantBreakpoints: Variant<Theme> = {
               ...input,
               parent: `${
                 input.parent ? `${input.parent} $$ ` : ''
-              }@media (max-width: ${calcMaxWidthBySize(size)})`,
+              }@media (max-width: ${variantEntries[idx - 1][1]})`,
               parentOrder: order,
             }),
         }
@@ -54,23 +52,32 @@ export const variantBreakpoints: Variant<Theme> = {
 
       order += idx + 1
 
-      // support for windicss @<breakpoint> => last breakpoint will not have the upper bound
-      if (isAtPrefix && idx < variantEntries.length - 1) {
+      // at-md means min-width of sm+0.1 and max-width of md
+      if (isAtPrefix) {
+        if (idx <= 0)
+          continue
+
         return {
           matcher: m,
-          handle: (input, next) =>
-            next({
+          handle: (input, next) => {
+            const prevSize = variantEntries[idx - 1][1]
+            const value = prevSize.match(/^-?[0-9]+\.?[0-9]*/)?.[0] || ''
+            const unit = prevSize.slice(value.length)
+            const minWidth = parseFloat(value) + 0.1
+            const minWidthValue = Number.isNaN(minWidth) ? prevSize : `${minWidth}${unit}`
+
+            return next({
               ...input,
               parent: `${
                 input.parent ? `${input.parent} $$ ` : ''
-              }@media (min-width: ${size}) and (max-width: ${calcMaxWidthBySize(
-                variantEntries[idx + 1][1]
-              )})`,
+              }@media (min-width: ${minWidthValue}) and (max-width: ${size})`,
               parentOrder: order,
-            }),
+            })
+          },
         }
       }
 
+      // Regular breakpoint (e.g., md) means max-width of md
       return {
         matcher: m,
         handle: (input, next) =>
@@ -78,7 +85,7 @@ export const variantBreakpoints: Variant<Theme> = {
             ...input,
             parent: `${
               input.parent ? `${input.parent} $$ ` : ''
-            }@media (min-width: ${size})`,
+            }@media (max-width: ${size})`,
             parentOrder: order,
           }),
       }
