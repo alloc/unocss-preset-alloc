@@ -11,34 +11,52 @@
   "prettier": "@alloc/prettier-config",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     },
     "./theme": {
-      "require": "./dist/theme.js",
-      "import": "./dist/theme.mjs",
-      "types": "./dist/theme.d.ts"
+      "require": {
+        "types": "./dist/theme.d.ts",
+        "default": "./dist/theme.js"
+      },
+      "types": "./dist/theme.d.mts",
+      "import": "./dist/theme.mjs"
     },
     "./variants": {
-      "require": "./dist/variants.js",
-      "import": "./dist/variants.mjs",
-      "types": "./dist/variants.d.ts"
+      "require": {
+        "types": "./dist/variants.d.ts",
+        "default": "./dist/variants.js"
+      },
+      "types": "./dist/variants.d.mts",
+      "import": "./dist/variants.mjs"
     },
     "./rules": {
-      "require": "./dist/rules.js",
-      "import": "./dist/rules.mjs",
-      "types": "./dist/rules.d.ts"
+      "require": {
+        "types": "./dist/rules.d.ts",
+        "default": "./dist/rules.js"
+      },
+      "types": "./dist/rules.d.mts",
+      "import": "./dist/rules.mjs"
     },
     "./colors": {
-      "require": "./dist/colors.js",
-      "import": "./dist/colors.mjs",
-      "types": "./dist/colors.d.ts"
+      "require": {
+        "types": "./dist/colors.d.ts",
+        "default": "./dist/colors.js"
+      },
+      "types": "./dist/colors.d.mts",
+      "import": "./dist/colors.mjs"
     },
     "./utils": {
-      "require": "./dist/utils.js",
-      "import": "./dist/utils.mjs",
-      "types": "./dist/utils.d.ts"
+      "require": {
+        "types": "./dist/utils.d.ts",
+        "default": "./dist/utils.js"
+      },
+      "types": "./dist/utils.d.mts",
+      "import": "./dist/utils.mjs"
     }
   },
   "main": "dist/index.js",
