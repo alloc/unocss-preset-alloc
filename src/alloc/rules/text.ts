@@ -1,6 +1,6 @@
 import { Rule } from '@unocss/core'
 
-export const tabularNums: Rule = ['tabnum', { 'font-feature-settings': 'tnum' }]
+export const tabularNums: Rule = ['tabnum', { 'font-feature-settings': '"tnum"' }]
 
 export const lineClamp: Rule = [
   /^line-clamp-(\d+)$/,
