@@ -41,7 +41,7 @@ export const cornerMap: Record<string, string[]> = {
   lb: ['-bottom-left'],
   br: ['-bottom-right'],
   rb: ['-bottom-right'],
-  '': [''],
+  '': ['-top-left', '-top-right', '-bottom-right', '-bottom-left'],
   bs: ['-start-start', '-start-end'],
   be: ['-end-start', '-end-end'],
   is: ['-end-start', '-start-start'],

@@ -15,7 +15,10 @@ export const outlinePreflight = /* css */ `
   position: absolute;
   pointer-events: none;
   border: var(--un-outline-width) var(--un-outline-style, solid) var(--un-outline-color);
-  border-radius: calc(var(--un-border-radius, 0px) - (var(--un-outline-position) * var(--un-outline-width)));
+  border-top-left-radius: calc(var(--un-border-top-left-radius, 0px) - (var(--un-outline-position) * var(--un-outline-width)));
+  border-top-right-radius: calc(var(--un-border-top-right-radius, 0px) - (var(--un-outline-position) * var(--un-outline-width)));
+  border-bottom-left-radius: calc(var(--un-border-bottom-left-radius, 0px) - (var(--un-outline-position) * var(--un-outline-width)));
+  border-bottom-right-radius: calc(var(--un-border-bottom-right-radius, 0px) - (var(--un-outline-position) * var(--un-outline-width)));
   inset: calc(var(--un-outline-position) * var(--un-outline-width));
 }
 `
