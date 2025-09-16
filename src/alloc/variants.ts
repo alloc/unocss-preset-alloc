@@ -4,6 +4,9 @@ import { Variant } from '@unocss/core'
 export const variants: Variant[] = [
   zoomVariant(),
   attributeVariant(),
+  variantMatcher('enter', input => ({
+    selector: `${input.selector}:focus-visible, ${input.selector}:hover`,
+  })),
   variantMatcher('span', input => ({
     selector: `${input.selector} span, ${input.selector} a`,
   })),
