@@ -1,6 +1,6 @@
 import type { Rule } from '@unocss/core'
 import type { Theme } from '../theme'
-import { colorResolver, globalKeywords, handler as h } from '../utils'
+import { colorResolver, globalKeywords, handler as h, makeGlobalStaticRules } from '../utils'
 
 export const outlinePreflight = /* css */ `
 .outline-center,
@@ -95,4 +95,46 @@ const willChangeProperty = (prop: string): string | undefined => {
 
 export const willChange: Rule[] = [
   [/^will-change-(.+)/, ([, p]) => ({ 'will-change': willChangeProperty(p) })],
+]
+
+const listStyles: Record<string, string> = {
+  'disc': 'disc',
+  'circle': 'circle',
+  'square': 'square',
+  'decimal': 'decimal',
+  'zero-decimal': 'decimal-leading-zero',
+  'greek': 'lower-greek',
+  'roman': 'lower-roman',
+  'upper-roman': 'upper-roman',
+  'alpha': 'lower-alpha',
+  'upper-alpha': 'upper-alpha',
+  'latin': 'lower-latin',
+  'upper-latin': 'upper-latin',
+}
+
+export const listStyle: Rule<Theme>[] = [
+  // base
+  [/^list-(.+?)(?:-(outside|inside))?$/, ([, alias, position]) => {
+    const style = listStyles[alias]
+    if (style) {
+      if (position) {
+        return {
+          'list-style-position': position,
+          'list-style-type': style,
+        }
+      }
+      return { 'list-style-type': style }
+    }
+  }, { autocomplete: [`list-(${Object.keys(listStyles).join('|')})`, `list-(${Object.keys(listStyles).join('|')})-(outside|inside)`] }],
+  // styles
+  ['list-outside', { 'list-style-position': 'outside' }],
+  ['list-inside', { 'list-style-position': 'inside' }],
+  ['list-none', { 'list-style-type': 'none' }],
+  // image
+  [/^list-image-(.+)$/, ([, d]) => {
+    if (/^\[url\(.+\)\]$/.test(d))
+      return { 'list-style-image': h.bracket(d) }
+  }],
+  ['list-image-none', { 'list-style-image': 'none' }],
+  ...makeGlobalStaticRules('list', 'list-style-type'),
 ]
