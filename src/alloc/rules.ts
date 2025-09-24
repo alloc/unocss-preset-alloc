@@ -1,7 +1,7 @@
 import { Rule } from '@unocss/core'
 import { Theme } from '../../theme'
 import { background } from './rules/background'
-import { containment } from './rules/containment'
+import { containment, isolation } from './rules/containment'
 import { contentVisibility } from './rules/content-visibility'
 import { filters } from './rules/filters'
 import { noOverScroll, noScrollBars, scrollSnap } from './rules/scroll'
@@ -16,6 +16,7 @@ export const rules: Rule<Theme>[] = [
   ...objectFit,
   ...scrollSnap,
   ...touchActions,
+  isolation,
   contentVisibility,
   lineClamp,
   noOverScroll,

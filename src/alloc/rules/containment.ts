@@ -5,3 +5,5 @@ export const containment: Rule[] = [
   ['contain-paint', { contain: 'paint' }],
   ['contain-content', { contain: 'content' }],
 ]
+
+export const isolation: Rule = ['isolate', { isolation: 'isolate' }]
